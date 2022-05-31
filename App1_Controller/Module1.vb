@@ -70,6 +70,9 @@ Module Module1
             p.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(p.StartInfo.FileName)
             p.EnableRaisingEvents = True
             AddHandler p.Exited, New EventHandler(AddressOf proc_exited)
+            
+            ' 各プロセス冒頭で、ネットワーク フォルダ接続が行われるが、処理が重なるとエラーとなるようなので、起動ウェイトを設ける。
+            Thread.Sleep(1000)
 
             p.Start()
             _dic_proc.Add(p.Id, SettingConfig.App_Name(app))
@@ -105,6 +108,9 @@ Module Module1
             p.StartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(p.StartInfo.FileName)
             p.EnableRaisingEvents = True
             AddHandler p.Exited, New EventHandler(AddressOf proc_exited)
+
+            ' 各プロセス冒頭で、ネットワーク フォルダ接続が行われるが、処理が重なるとエラーとなるようなので、起動ウェイトを設ける。
+            Thread.Sleep(1000)
 
             p.Start()
             _dic_proc.Add(p.Id, SettingConfig.App_Name(app))
